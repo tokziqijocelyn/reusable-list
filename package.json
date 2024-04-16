@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "name": "@jocelyntok/reusable-list",
+  "version": "1.0.0",
+  "description": "reusable list component",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "tsup index.tsx --format cjs,esm --dts --minify --sourcemap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tokziqijocelyn/reusable-list.git"
+  },
+  "keywords": [
+    "joce2024"
+  ],
+  "author": "jocelyn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tokziqijocelyn/reusable-list/issues"
+  },
+  "homepage": "https://github.com/tokziqijocelyn/reusable-list#readme"
+}
