@@ -7,6 +7,16 @@
     "react-dom": "^18.2.0",
     "tailwind-merge": "^2.2.2"
   },
+  "devDependencies": {
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
+    "autoprefixer": "^10.4.19",
+    "changeset": "^0.2.6",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  },
   "name": "@jocelyntok/reusable-list",
   "version": "1.0.0",
   "description": "reusable list component",
@@ -18,16 +28,6 @@
   "types": "dist/index.d.ts",
   "directories": {
     "lib": "lib"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.79",
-    "@types/react-dom": "^18.2.25",
-    "autoprefixer": "^10.4.19",
-    "changeset": "^0.2.6",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5"
   },
   "scripts": {
     "build": "tsup index.tsx --format cjs,esm --dts --minify --sourcemap"
