@@ -30,7 +30,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "build": "tsup index.tsx --format cjs,esm --dts --minify --sourcemap"
+    "build": "tsup index.tsx "
   },
   "repository": {
     "type": "git",
