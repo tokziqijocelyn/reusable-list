@@ -113,5 +113,4 @@
 // );
 
 // export default List;
-export * from './components/scrollableList';
-export * from './components/scrollableListItem';
+export * from './components';
