@@ -20,7 +20,7 @@
   "name": "@jocelyntok/reusable-list",
   "version": "1.0.0",
   "description": "reusable list component",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "files": [
     "dist"
@@ -30,7 +30,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "build": "tsup index.tsx --format cjs,esm --dts --minify --sourcemap"
+    "build": "tsup index.tsx --format cjs,esm --dts"
   },
   "repository": {
     "type": "git",
