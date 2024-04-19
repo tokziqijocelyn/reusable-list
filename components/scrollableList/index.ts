@@ -1,1 +1,1 @@
-export * from "./scrollableList"
+export { default } from "./scrollableList";

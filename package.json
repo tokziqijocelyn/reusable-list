@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@tanstack/react-virtual": "^3.3.0",
+    "@tanstack/react-virtual": "^2.2.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "react": "^18.2.0",
@@ -30,7 +30,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "build": "tsup index.tsx --format cjs,esm --dts"
+    "clean": "rm -rf dist",
+    "build": "tsup index.tsx --format cjs,esm --dts --minify --sourcemap"
   },
   "repository": {
     "type": "git",

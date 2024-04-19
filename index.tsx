@@ -113,3 +113,10 @@
 // );
 
 // export default List;
+
+// test if I can get recent one or not
+export type exampleType ={
+    example: number
+    // another: string
+}
+export * from "./components"

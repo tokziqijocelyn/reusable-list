@@ -1,19 +1,24 @@
 import React from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
+// import "../../global.css";
+import "../global.css";
 
 export type virtualizerProps = {
   horizontal?: boolean;
   children: React.ReactNode;
-  count: number;
+  width?: React.CSSProperties["width"];
+  height?: React.CSSProperties["height"];
 };
 
 const ScrollableList = React.forwardRef<HTMLDivElement, virtualizerProps>(
-  ({ children, ...props }, forwardedRef) => {
+  ({ children, width = "full", height = "400px", ...props }, forwardedRef) => {
     const parentRef = React.useRef<HTMLDivElement>(null);
+
+    const childrenArray = React.Children.toArray(children);
 
     const virtualizer = useVirtualizer({
       horizontal: props.horizontal ?? false,
-      count: props.count,
+      count: childrenArray.length,
       getScrollElement: () => parentRef.current,
       estimateSize: () => 50,
     });
@@ -21,34 +26,42 @@ const ScrollableList = React.forwardRef<HTMLDivElement, virtualizerProps>(
     const items = virtualizer.getVirtualItems();
 
     return (
-      <div ref={parentRef} className="bg-red-100">
-        <div className="overflow-y-auto h-full">
-          {/* Container with scrolling */}
-          <div className="relative w-full">
-            {/* Inner container for positioning */}
-            <div
-              className={`absolute top-0 left-0 w-full transform translate-y-${
-                items[0]?.start ?? 0
-              }px`}
-            >
-              {/* {items.map((virtualRow) => (
+      <>
+        <div
+          ref={parentRef}
+          style={{
+            height: height,
+            width: width,
+            overflow: "auto",
+          }}
+          className="bg-red-100"
+        >
+          <div
+            style={{
+              height: `${virtualizer.getTotalSize()}px`,
+              width: "100%",
+              position: "relative",
+            }}
+          >
+            {items.map((virtualItem) => {
+              const child = childrenArray[virtualItem.index];
+              const { children } = React.isValidElement(child)
+                ? child.props
+                : { children: null };
+
+              return (
                 <div
-                  key={virtualRow.key}
-                  data-index={virtualRow.index}
+                  key={virtualItem.key}
+                  data-index={virtualItem.index}
                   ref={virtualizer.measureElement}
-                  className={`py-4 px-0 border-b border-gray-200`}
                 >
-                  <div className="flex items-center justify-between">
-                    <div>Row {virtualRow.index}</div>
-                    <div>{children}</div>
-                  </div>
+                  <div className="bg-blue-100">{children}</div>
                 </div>
-              ))} */}
-              {children}
-            </div>
+              );
+            })}
           </div>
         </div>
-      </div>
+      </>
     );
   }
 );

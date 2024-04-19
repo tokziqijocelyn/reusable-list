@@ -1,1 +1,1 @@
-export * from "./paginatedList"
+export {default} from "./paginatedList"

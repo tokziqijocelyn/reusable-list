@@ -7,7 +7,10 @@ export type VirtualItemProp = {
   children: React.ReactNode;
 };
 
-const ScrollableListItem = ({ items, virtualizer, children }: VirtualItemProp) => {
+const ScrollableListItem = ({ 
+  items, 
+  virtualizer, 
+  children }: VirtualItemProp) => {
   return (
     <div>
       {items.map((virtualRow) => (
