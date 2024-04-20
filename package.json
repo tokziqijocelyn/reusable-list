@@ -14,14 +14,15 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "tsup": "^8.0.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "@changesets/cli": "^2.27.1"
   },
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "name": "@jocelyntok/reusable-list",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "reusable list component",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -33,7 +34,6 @@
     "lib": "lib"
   },
   "scripts": {
-    "clean": "rm -rf dist",
     "build": "tsup index.tsx --format cjs,esm --dts --minify --sourcemap --treeshake"
   },
   "repository": {

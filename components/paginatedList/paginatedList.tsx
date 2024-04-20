@@ -18,7 +18,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 //   },
 // });
 
-const paginatedVariant = cva("bg-header", {
+const paginatedVariant = cva("flex", {
   variants: {
     variant: {
       default: "flex flex-col flex-grow:1",
@@ -76,7 +76,7 @@ const PaginatedList = ({ children, ...props }: PaginatedListProps) => {
             ? child.props
             : { children: null };
           return (
-            <div key={index} className="bg-blue-500 p-5">
+            <div key={index}>
               {children}
             </div>
           );
