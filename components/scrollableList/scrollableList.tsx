@@ -33,7 +33,7 @@ const ScrollableList = React.forwardRef<HTMLDivElement, virtualizerProps>(
             width: width,
             overflow: "auto",
           }}
-          className="bg-blue-500 p-5"
+          className="p-3 border-1 border-grey-400 first: rounded-t-md last: rounded-b-md"
         >
           <div
             style={{
@@ -65,7 +65,7 @@ const ScrollableList = React.forwardRef<HTMLDivElement, virtualizerProps>(
                       : "",
                   }}
                 >
-                  <div className="bg-blue-400">
+                  <div className="">
                     row{virtualItem.index}
                     {children}
                   </div>
