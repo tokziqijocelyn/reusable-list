@@ -1,6 +1,3 @@
 export * from "./defaultList"
-export * from "./defaultListItem"
-export * from "./paginatedList"
-export * from "./rootList"
+export {default as PaginatedList} from "./paginatedList"
 export {default as ScrollableList} from "./scrollableList"
-export {default as ScrollableListItem} from "./scrollableListItem"

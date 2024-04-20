@@ -1,7 +1,6 @@
 import React from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
-// import "../../global.css";
-import "../global.css";
+import "../../global.css";
 
 export type virtualizerProps = {
   horizontal?: boolean;
@@ -34,12 +33,16 @@ const ScrollableList = React.forwardRef<HTMLDivElement, virtualizerProps>(
             width: width,
             overflow: "auto",
           }}
-          className="bg-red-100"
+          className="bg-blue-500 p-5"
         >
           <div
             style={{
-              height: `${virtualizer.getTotalSize()}px`,
-              width: "100%",
+              height: props.horizontal
+                ? "100%"
+                : `${virtualizer.getTotalSize()}px`,
+              width: props.horizontal
+                ? `${virtualizer.getTotalSize()}px`
+                : "100%",
               position: "relative",
             }}
           >
@@ -54,8 +57,18 @@ const ScrollableList = React.forwardRef<HTMLDivElement, virtualizerProps>(
                   key={virtualItem.key}
                   data-index={virtualItem.index}
                   ref={virtualizer.measureElement}
+                  style={{
+                    position: props.horizontal ? "absolute" : "relative",
+                    height: props.horizontal ? "100%" : "",
+                    transform: props.horizontal
+                      ? `translateX(${virtualItem.start}px)`
+                      : "",
+                  }}
                 >
-                  <div className="bg-blue-100">{children}</div>
+                  <div className="bg-blue-400">
+                    row{virtualItem.index}
+                    {children}
+                  </div>
                 </div>
               );
             })}

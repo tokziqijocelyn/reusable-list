@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./**/*.{tsx,ts,js,jsx}", "./components/**/*.{tsx,ts,js,jsx}"],
+  content: ["./**/*.{tsx,ts,js,jsx}", "./components/**/*.{js,ts,jsx,tsx,mdx}", "./components/scrollableList/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {

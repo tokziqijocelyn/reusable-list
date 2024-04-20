@@ -119,4 +119,5 @@ export type exampleType ={
     example: number
     // another: string
 }
+
 export * from "./components"
