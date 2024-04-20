@@ -1,12 +1,41 @@
 import React, { forwardRef } from "react";
 import "../../global.css";
 import PageNumbers from "./pageNumbers";
+import Header from "../header";
+import { cn } from "../../lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 
-export type PaginatedListProps = {
+//disabled style
+// const accordionVariants = cva("bg-header", {
+//   variants: {
+//     variant: {
+//       default: "text-contentText",
+//       disabled: "text-disabledText ",
+//     },
+//   },
+//   defaultVariants: {
+//     variant: "default",
+//   },
+// });
+
+const paginatedVariant = cva("bg-header", {
+  variants: {
+    variant: {
+      default: "flex flex-col flex-grow:1",
+      horizontal: "flex flex-row flex-grow:1",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+export interface PaginatedListProps extends VariantProps<typeof paginatedVariant> {
   itemsPerPage: number;
   children: React.ReactNode;
-};
-
+  header?: string;
+  horizontal?: boolean;
+}
 
 const PaginatedList = ({ children, ...props }: PaginatedListProps) => {
   // Storage of info of pages
@@ -39,7 +68,8 @@ const PaginatedList = ({ children, ...props }: PaginatedListProps) => {
 
   return (
     <div>
-      <div>
+      {props.header && <Header header={props.header} />}
+      <div className="flex">
         {currentPosts.map((item, index) => {
           const child = childrenArray[index];
           const { children } = React.isValidElement(child)

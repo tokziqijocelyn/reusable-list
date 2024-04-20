@@ -1,4 +1,5 @@
 import React from "react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 type PageProps = {
   itemsPerPage: number;
@@ -22,22 +23,22 @@ const PageNumbers = ({
   }
 
   return (
-    <div className="pagination-container">
+    <div className="flex flex-row">
       <ul className="pagination">
         <li onClick={previousPage} className="page-number">
-          Prev
+          <ChevronLeft />
         </li>
         {pageNumbers.map((number) => (
           <li
             key={number}
             onClick={() => paginate(number)}
-            className="page-number"
+            className="p-2 rounded curser-pointer border-primary border-1 text-primary"
           >
             {number}
           </li>
         ))}
         <li onClick={nextPage} className="page-number">
-          Next
+          <ChevronRight />
         </li>
       </ul>
     </div>
