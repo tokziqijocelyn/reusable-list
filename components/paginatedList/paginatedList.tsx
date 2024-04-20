@@ -7,6 +7,7 @@ export type PaginatedListProps = {
   children: React.ReactNode;
 };
 
+
 const PaginatedList = ({ children, ...props }: PaginatedListProps) => {
   // Storage of info of pages
   // So that user can pass their own children
@@ -36,8 +37,6 @@ const PaginatedList = ({ children, ...props }: PaginatedListProps) => {
     }
   };
 
-  console.log("childrenArray", childrenArray);
-
   return (
     <div>
       <div>
@@ -52,14 +51,6 @@ const PaginatedList = ({ children, ...props }: PaginatedListProps) => {
             </div>
           );
         })}
-
-        {/* type Props = {
-  itemsPerPage: number;
-  totalItems: number;
-  paginate: (pageNumber: number) => void;
-  previousPage: () => void;
-  nextPage: () => void;
-}; */}
 
         <PageNumbers
           itemsPerPage={itemsPerPage}
