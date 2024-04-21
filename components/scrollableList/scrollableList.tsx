@@ -1,16 +1,23 @@
 import React from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import "../../global.css";
+import Header from "../header";
+import Footer from "../footer";
 
 export type virtualizerProps = {
   horizontal?: boolean;
   children: React.ReactNode;
   width?: React.CSSProperties["width"];
   height?: React.CSSProperties["height"];
+  header?: string;
+  footer?: string;
 };
 
 const ScrollableList = React.forwardRef<HTMLDivElement, virtualizerProps>(
-  ({ children, width = "full", height = "400px", ...props }, forwardedRef) => {
+  (
+    { children, width = "full", height = "400px", header, footer, ...props },
+    forwardedRef
+  ) => {
     const parentRef = React.useRef<HTMLDivElement>(null);
 
     const childrenArray = React.Children.toArray(children);
@@ -26,6 +33,7 @@ const ScrollableList = React.forwardRef<HTMLDivElement, virtualizerProps>(
 
     return (
       <>
+        {header && <Header header={header} />}
         <div
           ref={parentRef}
           style={{
@@ -65,14 +73,13 @@ const ScrollableList = React.forwardRef<HTMLDivElement, virtualizerProps>(
                       : "",
                   }}
                 >
-                  <div className="">
-                    {children}
-                  </div>
+                  <div className="">{children}</div>
                 </div>
               );
             })}
           </div>
         </div>
+        {footer && <Footer footer={footer} />}
       </>
     );
   }
