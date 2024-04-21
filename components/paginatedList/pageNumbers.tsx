@@ -7,6 +7,7 @@ type PageProps = {
   paginate: (pageNumber: number) => void;
   previousPage: () => void;
   nextPage: () => void;
+  currentPage: number;
 };
 
 const PageNumbers = ({
@@ -15,6 +16,7 @@ const PageNumbers = ({
   paginate,
   previousPage,
   nextPage,
+  currentPage,
 }: PageProps) => {
   const pageNumbers = [];
 
@@ -23,23 +25,45 @@ const PageNumbers = ({
   }
 
   return (
-    <div className="flex flex-row">
-      <ul className="pagination">
-        <li onClick={previousPage} className="page-number">
-          <ChevronLeft />
-        </li>
+    <div className="p-4">
+      <ul className="pagination flex flex-row">
+        {currentPage == 1 ? (
+          <li
+            className="rounded border-1 border-grey-200 opacity-25"
+          >
+            <ChevronLeft />
+          </li>
+        ) : (
+          <li
+            onClick={previousPage}
+            className="rounded border-1 cursor-pointer border-grey-200"
+          >
+            <ChevronLeft />
+          </li>
+        )}
         {pageNumbers.map((number) => (
           <li
             key={number}
             onClick={() => paginate(number)}
-            className="p-2 rounded curser-pointer border-primary border-1 text-primary"
+            className={`rounded pl-2 pr-2 mx-2 curser-pointer ${
+              number === currentPage
+                ? "border-primary border-2 text-primary"
+                : " hover:text-primary border-2 border-grey-200 cursor-pointer"
+            }`}
           >
             {number}
           </li>
         ))}
-        <li onClick={nextPage} className="page-number">
-          <ChevronRight />
-        </li>
+
+        {currentPage >= totalItems ? (
+          <li className="rounded border-1 border-grey-200 opacity-25">
+            <ChevronRight />
+          </li>
+        ) : (
+          <li onClick={nextPage} className="rounded border-1 cursor-pointer border-grey-200">
+            <ChevronRight />
+          </li>
+        )}
       </ul>
     </div>
   );

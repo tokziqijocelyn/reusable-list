@@ -66,7 +66,6 @@ const ScrollableList = React.forwardRef<HTMLDivElement, virtualizerProps>(
                   }}
                 >
                   <div className="">
-                    row{virtualItem.index}
                     {children}
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import Header from "../header";
 import Footer from "../footer";
 
@@ -8,7 +8,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const DefaultList = ({ header, footer, children }: Props) => {
+const DefaultList = forwardRef<HTMLDivElement, Props>(({ header, footer, children }, forwardRef) => {
   const childrenArray = React.Children.toArray(children);
 
   return (
@@ -22,6 +22,6 @@ const DefaultList = ({ header, footer, children }: Props) => {
       {footer && <Footer footer={footer} />}
     </div>
   );
-};
+});
 
 export default DefaultList;

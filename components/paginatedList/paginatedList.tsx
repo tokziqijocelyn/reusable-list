@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import "../../global.css";
 import PageNumbers from "./pageNumbers";
 import Header from "../header";
@@ -42,15 +42,43 @@ const PaginatedList = forwardRef<HTMLDivElement, PaginatedListProps>(
   ({ children, variant, ...props }, forwardRef) => {
     // Storage of info of pages
     // So that user can pass their own children
+
     const childrenArray = React.Children.toArray(children);
-    const arrayCount = childrenArray.length;
-    const [currentPage, setCurrentPage] = React.useState(1);
-    const [itemsPerPage, setItemsPerPage] = React.useState(props.itemsPerPage);
+
+    const [items, setItems] = React.useState<React.ReactNode[]>(childrenArray);
+    const arrayCount: number = childrenArray.length;
+    const [currentPage, setCurrentPage] = React.useState<number>(1);
+    const [itemsPerPage, setItemsPerPage] = React.useState<number>(
+      props.itemsPerPage
+    );
+
+    // so there is no re-render of the items
+    useEffect(() => {
+      setItems(childrenArray);
+    }, []);
+
+    useEffect(() => {
+      console.log("render of itemslist", items);
+    }, [items]);
 
     // Getting the indexes required per page
     const indexOfLastPost = currentPage * itemsPerPage;
-    const indexOfFirstPost = indexOfLastPost - itemsPerPage;
-    const currentPosts = childrenArray.slice(indexOfFirstPost, indexOfLastPost);
+
+    //indexOfFirstPost doesn't go beyond the actual number of elements.
+    const indexOfFirstPost = Math.min(
+      (currentPage - 1) * itemsPerPage,
+      items.length - 1
+    );
+
+    const currentPosts = items.slice(indexOfFirstPost, indexOfLastPost);
+
+    // const currentPosts = items.slice(3, );
+
+    // useEffect(() => {
+    //   console.log("render of currentPosts", currentPosts);
+    //   console.log("indexOfFirstPost", indexOfFirstPost);
+    //   console.log("indexOfLastPost", indexOfLastPost);
+    // }, [currentPosts]);
 
     const paginate = (pageNumber: number) => {
       setCurrentPage(pageNumber);
@@ -62,31 +90,42 @@ const PaginatedList = forwardRef<HTMLDivElement, PaginatedListProps>(
     };
 
     const nextPage = () => {
-      if (currentPage !== Math.ceil(childrenArray.length / itemsPerPage)) {
+      if (currentPage !== Math.ceil(items.length / itemsPerPage)) {
         setCurrentPage(currentPage + 1);
       }
     };
 
     return (
-      <div>
+      <div className="">
         {props.header && <Header header={props.header} />}
         <div className={cn(paginatedVariant({ variant }))}>
           {currentPosts.map((item, index) => {
-            const child = childrenArray[index];
-            const { children } = React.isValidElement(child)
-              ? child.props
-              : { children: null };
-            return <div key={index}>{children}</div>;
-          })}
+            // const child = items[index];
 
+            // console.log("child", child);
+
+            // //            console.log("child", index);
+            // const { children } = React.isValidElement(child)
+            //   ? child.props
+            //   : { children: null };
+            // return <div key={index}>{children}</div>;
+
+            return <div key={index}>{item}</div>;
+          })}
+        </div>
+
+        <div className="flex justify-end">
           <PageNumbers
             itemsPerPage={itemsPerPage}
             totalItems={arrayCount}
             paginate={paginate}
             previousPage={previousPage}
             nextPage={nextPage}
+            currentPage={currentPage}
           />
         </div>
+
+        {children}
       </div>
     );
   }
