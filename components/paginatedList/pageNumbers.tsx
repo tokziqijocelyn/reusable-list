@@ -28,9 +28,7 @@ const PageNumbers = ({
     <div className="p-4">
       <ul className="pagination flex flex-row">
         {currentPage == 1 ? (
-          <li
-            className="rounded border-1 border-grey-200 opacity-25"
-          >
+          <li className="rounded border-1 border-grey-200 opacity-25">
             <ChevronLeft />
           </li>
         ) : (
@@ -55,12 +53,15 @@ const PageNumbers = ({
           </li>
         ))}
 
-        {currentPage >= totalItems ? (
+        {currentPage >= (totalItems/itemsPerPage) ? (
           <li className="rounded border-1 border-grey-200 opacity-25">
             <ChevronRight />
           </li>
         ) : (
-          <li onClick={nextPage} className="rounded border-1 cursor-pointer border-grey-200">
+          <li
+            onClick={nextPage}
+            className="rounded border-1 cursor-pointer border-grey-200"
+          >
             <ChevronRight />
           </li>
         )}
